@@ -9,7 +9,7 @@ public class Adapter
 
     public Adapter(string line)
     {
-        List<string> props = line.Split(' ').ToList();
+        List<string> props = line.Split("  ").ToList();
         props = props.Where(p => !String.IsNullOrEmpty(p)).ToList();
         if (props.Count != 4)
         {
@@ -21,17 +21,20 @@ public class Adapter
         Name = props[3].Trim();
     }
 
-    public void Toggle() {
-        if(IsEnabled) Disable();
+    public void Toggle()
+    {
+        if (IsEnabled) Disable();
         else Enable();
     }
 
-    public void Enable() {
+    public void Enable()
+    {
         string command = "netsh interface set interface " + Name + " admin=enable";
         CommandRunner.Run(command);
     }
 
-    public void Disable() {
+    public void Disable()
+    {
         string command = "netsh interface set interface " + Name + " admin=disable";
         CommandRunner.Run(command);
     }
